@@ -78,5 +78,4 @@ const hirePeople = e => {
 
 }
 
-
 export default hirePeople;
