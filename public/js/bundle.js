@@ -86,27 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./classWork/task2.js":
-/*!****************************!*\
-  !*** ./classWork/task2.js ***!
-  \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar lights = document.getElementsByClassName('trafficLight');\nvar wrap = document.querySelector('.wrap');\n\nvar absolutelyNight = function absolutelyNight() {\n  var _loop = function _loop(i) {\n    setInterval(function () {\n      return lights[i].classList.toggle('yellow');\n    }, 1000);\n  };\n\n  for (var i = 0; i < lights.length; i++) {\n    _loop(i);\n  }\n};\n\nvar myEvents = function myEvents() {\n  window.addEventListener('load', function () {\n    absolutelyNight();\n    var night = new CustomEvent('startNight', {\n      detail: {\n        state: 'night'\n      }\n    });\n    wrap.dispatchEvent(night);\n  });\n  document.querySelector('body').addEventListener('click', function (e) {\n    var target = e && e.target;\n\n    if (target.classList.contains('trafficLight') || target.classList.contains('trafficLight__circle')) {\n      target.addEventListener('startNight', function () {\n        alert(hi);\n      });\n    } // target.addEventListener('start',)\n\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (myEvents);\n\n//# sourceURL=webpack:///./classWork/task2.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _classWork_task2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classWork/task2 */ \"./classWork/task2.js\");\n// import hirePeople from '../classWork/task1';\n // let body = document.querySelector('body');\n// body.addEventListener('click', hirePeople);\n// console.log(peopleArray);\n\nObject(_classWork_task2__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("// import hirePeople from '../classWork/task1';\n// let body = document.querySelector('body');\n// body.addEventListener('click', hirePeople);\n// console.log(peopleArray);\n//----------------------------------task2----------------------------------------------\ndocument.addEventListener('DOMContentLoaded', function () {\n  var lights = document.querySelectorAll('.trafficLight');\n  var wrap = document.querySelector('.wrap');\n  var butStartNight = document.querySelector('#Do');\n  var check = true;\n  var night = new CustomEvent('night');\n  var start = new CustomEvent('start');\n  var stop = new CustomEvent('stop');\n\n  var absolutelyNight = function absolutelyNight() {\n    var _loop = function _loop(i) {\n      if (lights[i].classList.contains('red')) {\n        lights[i].classList.remove('red');\n      }\n\n      if (lights[i].classList.contains('green')) {\n        lights[i].classList.remove('green');\n      }\n\n      if (!lights[i].classList.contains('interval')) {\n        lights[i].classList.add('interval');\n      }\n\n      if (check) {\n        if (lights[i].classList.contains('interval')) {\n          setInterval(function () {\n            return lights[i].classList.toggle('yellow');\n          }, 1000);\n        }\n      }\n    };\n\n    for (var i = 0; i < lights.length; i++) {\n      _loop(i);\n    }\n\n    check = false;\n  };\n\n  window.addEventListener('load', function () {\n    absolutelyNight();\n  });\n  butStartNight.addEventListener('click', function () {\n    absolutelyNight();\n  });\n  lights.forEach(function (item) {\n    item.addEventListener('click', function () {\n      console.log('click');\n\n      if (item.classList.contains('interval')) {\n        item.dispatchEvent(stop);\n      } else if (item.classList.contains('red')) {\n        item.dispatchEvent(start);\n      } else if (item.classList.contains('green')) {\n        item.dispatchEvent(night);\n      }\n    });\n    item.addEventListener('start', function () {\n      item.classList.add('green');\n      item.classList.remove('red');\n    });\n    item.addEventListener('stop', function () {\n      item.classList.add('red');\n      item.classList.remove('interval');\n    });\n    item.addEventListener('night', function () {\n      item.classList.add('interval');\n      item.classList.remove('green');\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
